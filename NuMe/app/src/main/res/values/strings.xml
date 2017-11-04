@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">NuMe</string>
+    <string name="title_activity_main2">Main2Activity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_add_habit">AddHabitActivity</string>
+    <string name="title_activity_view_habit">ViewHabitActivity</string>
+    <string name="sunday">Sunday</string>
+    <string name="monday">Monday</string>
+    <string name="tuesday">Tuesday</string>
+    <string name="wednesday">Wednesday</string>
+    <string name="thursday">Thursday</string>
+    <string name="friday">Friday</string>
+    <string name="saturday">Saturday</string>
+    <string name="habitTitle">Habit Title</string>
+    <string name="habitReason">Habit Reason</string>
+    <string name="freq">Frequency</string>
+    <string name="addHabit">Add Habit</string>
+
+
+</resources>
