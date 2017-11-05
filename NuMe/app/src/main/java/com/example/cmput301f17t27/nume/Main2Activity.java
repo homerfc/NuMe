@@ -1,5 +1,6 @@
 package com.example.cmput301f17t27.nume;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -15,15 +16,28 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 /*imported widget*/
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Main2Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-
+    private static final String FILENAME = "file.sav";
     private ArrayList<Habit> HabitList = new ArrayList<Habit>();
     private ArrayAdapter<Habit> HabitListAadpter;
     private ListView HabitAdapter;
@@ -49,19 +63,68 @@ public class Main2Activity extends AppCompatActivity
 
         HabitAdapter = (ListView) findViewById(R.id.HabitAdapter);
 
+        HabitAdapter.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(Main2Activity.this, ViewHabitActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
+
     /*
     *created by xcao2 oct 28.
      */
     @Override
     protected void onStart(){
         super.onStart();
+        loadFromFile();
         //get result back from elasticsearch
-        HabitListAadpter = new ArrayAdapter<Habit>(this, R.layout.content_main2,HabitList);
+        HabitListAadpter = new ArrayAdapter<Habit>(this, R.layout.list_item,HabitList);
         HabitAdapter.setAdapter(HabitListAadpter);
-
-
     }
+
+    /**
+     * Loads Counters from a saved file
+     * Else creates a new Coutner Array
+     */
+    private void loadFromFile(){
+        try {
+            FileInputStream fis = openFileInput(FILENAME);
+            BufferedReader in = new BufferedReader(new InputStreamReader(fis));
+            Gson gson = new Gson();
+            //RenAME
+            Type listType = new TypeToken<ArrayList<Habit>>(){}.getType();
+            HabitList= gson.fromJson(in, listType);
+
+        } catch (FileNotFoundException e) {
+                HabitList  = new ArrayList<Habit>();
+            //throw new RuntimeException(e);
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    private void saveInFile() {
+        try {
+            FileOutputStream fos = openFileOutput(FILENAME, 0);
+            OutputStreamWriter writer = new OutputStreamWriter(fos);
+            Gson gson = new Gson();
+            gson.toJson(HabitList, writer);
+            writer.flush();
+            //fos.close();
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            throw new RuntimeException();
+        } catch (IOException e) {
+            e.printStackTrace();
+            // TODO Auto-generated catch block
+            throw new RuntimeException();
+        }
+    }
+
 
     @Override
     public void onBackPressed() {
@@ -125,6 +188,17 @@ public class Main2Activity extends AppCompatActivity
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode==1) {
+            if(resultCode == Activity.RESULT_OK) {
+                String title = data.getStringExtra("title");
+                String reason = data.getStringExtra("reason");
+                Date sDate = (Date) data.getSerializableExtra("date");
+                ArrayList freq = data.getStringArrayListExtra("freq");
+                Habit habit = new Habit(title,reason,sDate,freq);
+                HabitList.add(habit);
+                HabitListAadpter.notifyDataSetChanged();
+                saveInFile();
+
+            }
             return;
             //Do Something after returning from Add Habit
         }else if(requestCode==2){

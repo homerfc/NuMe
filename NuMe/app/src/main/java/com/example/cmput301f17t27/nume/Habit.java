@@ -9,20 +9,20 @@ import java.util.Date;
  */
 
 public class Habit implements Serializable {
-    public enum Frequency {
-        SUNDAY, MONDAY, TUESDAY,
-        WEDNESDAY, THURSDAY, FRIDAY,
-        SATURDAY
-    }
+
     private String title;
     private String reason;
     private Date dateCreated;
     private Date dateToStart;
-    private Frequency frequency;
+    private ArrayList<String> frequency;
     public ArrayList<HabitEvent> habitEvents = new ArrayList<HabitEvent>();
 
-    public Habit( String title, String reason, Date dateToStart, Frequency frequency) {
-
+    public Habit( String title, String reason, Date dateToStart, ArrayList frequency) {
+        this.title = title;
+        this.reason = reason;
+        this.dateCreated= new Date();
+        this.dateToStart=dateToStart;
+        this.frequency=frequency;
     }
 
     public String getTitle() {
@@ -53,11 +53,11 @@ public class Habit implements Serializable {
         this.dateToStart = dateToStart;
     }
 
-    public Frequency getFrequency() {
-        return frequency;
+    public ArrayList<String> getFrequency() {
+        return this.frequency;
     }
 
-    public void setFrequency(Frequency frequency) {
+    public void setFrequency(ArrayList frequency) {
         this.frequency = frequency;
     }
 
@@ -95,6 +95,14 @@ public class Habit implements Serializable {
         } else {
             return -1;
         }
+    }
+    @Override
+    /**
+     * Returns a string Value of the Habit
+     */
+    public String toString(){
+        //toDo add next occurance of this habit
+        return "Habit: "+this.title+"\nReason:"+this.reason;
     }
 
 
