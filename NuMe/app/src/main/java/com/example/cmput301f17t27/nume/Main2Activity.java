@@ -34,6 +34,14 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * Creates the Main2Activity
+ *
+ * @author Dylan & Xuan
+ * @version 0.1
+ * @see AddHabitActivity
+ * @since 0.1
+ */
 public class Main2Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -43,7 +51,10 @@ public class Main2Activity extends AppCompatActivity
     private ListView HabitAdapter;
 
 
-
+    /**
+     * Creates the current apps homepage
+     * Gives side bar options and Habit List
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,8 +84,8 @@ public class Main2Activity extends AppCompatActivity
 
     }
 
-    /*
-    *created by xcao2 oct 28.
+    /**
+     * Loads file and sets HabitList
      */
     @Override
     protected void onStart(){
@@ -106,6 +117,10 @@ public class Main2Activity extends AppCompatActivity
             throw new RuntimeException(e);
         }
     }
+
+    /**
+     * saves Habits to the file
+     */
     private void saveInFile() {
         try {
             FileOutputStream fos = openFileOutput(FILENAME, 0);
@@ -126,6 +141,9 @@ public class Main2Activity extends AppCompatActivity
     }
 
 
+    /**
+     * Out of Box (OOB)
+     */
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -136,6 +154,11 @@ public class Main2Activity extends AppCompatActivity
         }
     }
 
+    /**
+     * OOB
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -143,6 +166,11 @@ public class Main2Activity extends AppCompatActivity
         return true;
     }
 
+    /**
+     * OOB
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -158,6 +186,14 @@ public class Main2Activity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Side Navigation bar
+     * Directs user to new activities
+     * @see AddHabitActivity
+     * @see ViewHabitActivity
+     * @param item
+     * @return
+     */
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -186,6 +222,13 @@ public class Main2Activity extends AppCompatActivity
         return true;
     }
 
+    /**
+     * Returns data from the other app pages
+     * Creates a new Habit
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode==1) {
             if(resultCode == Activity.RESULT_OK) {

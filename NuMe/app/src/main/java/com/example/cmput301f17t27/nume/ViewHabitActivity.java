@@ -38,7 +38,7 @@ public class ViewHabitActivity extends AppCompatActivity {
         //Setup the UI list of HabitEvents
         //todo fix
         //adapter = new EventAdapter(this, habit.getEvents());
-        
+
         //No list view available
         eventList = (ListView) findViewById(R.id.eventlist);
         eventList.setAdapter(adapter);

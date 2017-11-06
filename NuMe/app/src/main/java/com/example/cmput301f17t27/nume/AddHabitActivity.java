@@ -21,8 +21,9 @@ import java.util.Date;
 * Creates a Habit based on the User inputs
 * Currently passes variables back and saves them into a file
  * @author Dylan & Xuan
- *
+ * @version 0.1
 *  @see Main2Activity
+ * @since 0.1
 * todo Remove the Default Values on the AddHabit XML
 * */
 public class AddHabitActivity extends AppCompatActivity {
@@ -31,15 +32,20 @@ public class AddHabitActivity extends AppCompatActivity {
     private EditText date;
     private CheckBox sun;
     private CheckBox mon;
-    private RadioButton tues;
-    private RadioButton wed;
-    private RadioButton thurs;
-    private RadioButton fri;
-    private RadioButton sat;
+    private CheckBox tues;
+    private CheckBox wed;
+    private CheckBox thurs;
+    private CheckBox fri;
+    private CheckBox sat;
     private ArrayList<String> frequencyList;
 
     @Override
-    //ToDo Replace all radio buttons to checkbox
+    //ToDo Replace save to file with elastic search
+    /**
+     * Creates the UI for Add Habit Activity
+     * Called from Main2Activity
+     *
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_habit);
@@ -51,19 +57,18 @@ public class AddHabitActivity extends AppCompatActivity {
 
         sun = (CheckBox) findViewById(R.id.cBsunday);
         mon = (CheckBox) findViewById(R.id.cBmonday);
-        tues = (RadioButton) findViewById(R.id.rBtuesday);
-        wed = (RadioButton) findViewById(R.id.rBwednesday);
-        thurs = (RadioButton) findViewById(R.id.rBthursday);
-        fri = (RadioButton) findViewById(R.id.rBfriday);
-        sat = (RadioButton) findViewById(R.id.rBsaturday);
+        tues = (CheckBox) findViewById(R.id.cBtuesday);
+        wed = (CheckBox) findViewById(R.id.cBwednesday);
+        thurs = (CheckBox) findViewById(R.id.cBthursday);
+        fri = (CheckBox) findViewById(R.id.cBfriday);
+        sat = (CheckBox) findViewById(R.id.cBsaturday);
 
         Button addHabit = (Button) findViewById(R.id.addHabit);
 
         addHabit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Do Something
-                //Store with elasticSearch
+                //todo Store with elasticSearch
 
                 //Checking Dates
                 if (sun.isChecked()){ frequencyList.add("Sunday");}
@@ -79,26 +84,24 @@ public class AddHabitActivity extends AppCompatActivity {
                 String habit_title = title.getText().toString();
                 String habit_reason = reason.getText().toString();
                 String Habit_start_date = date.getText().toString();
+                //Formats Date
                 String[] splited_date_string = Habit_start_date.split("/");
-
                 int day = Integer.parseInt(splited_date_string[0]); //return int for day
                 int month = Integer.parseInt(splited_date_string[1]); //return int for month
                 int year = Integer.parseInt(splited_date_string[2]); //return int for year
-
                 Date start_Date = new Date(year,month,day);
                 //get all the habit info end;
 
 
-                //pass to elasticsearch index
+                //todo pass to elasticsearch index
                 //ElasticsearchController.AddHabitTask addHabitTask = new ElasticsearchController.AddHabitTask();
-                //addHabitTask.execute(newHabit)
+
+                //Passes info to main2Activity to be processed and saved
                 Intent intent = new Intent();
                 intent.putExtra("title",habit_title);
                 intent.putExtra("reason",habit_reason);
                 intent.putExtra("date",start_Date);
-                //intent.putExtra("date", sDate.getTime());
                 intent.putExtra("freq",frequencyList);
-
                 setResult(Activity.RESULT_OK, intent);
                 finish();
             }
