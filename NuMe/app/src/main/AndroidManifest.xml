@@ -31,7 +31,11 @@
             android:label="@string/title_activity_view_habit"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".AddEventActivity" />
-        <activity android:name=".EditEventActivity"></activity>
+        <activity android:name=".EditEventActivity" />
+        <activity
+            android:name=".EditHabitActivity"
+            android:label="@string/title_activity_edit_habit"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

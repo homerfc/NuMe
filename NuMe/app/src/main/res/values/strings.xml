@@ -19,6 +19,8 @@
     <string name="habitReason">Habit Reason</string>
     <string name="freq">Frequency</string>
     <string name="addHabit">Add Habit</string>
+    <string name="title_activity_edit_habit">EditHabitActivity</string>
+    <string name="editHabit">Save Changes</string>
 
 
 </resources>

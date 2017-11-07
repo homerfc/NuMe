@@ -3,8 +3,7 @@ package com.example.cmput301f17t27.nume;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -47,7 +46,7 @@ public class Main2Activity extends AppCompatActivity
 
     private static final String FILENAME = "file.sav";
     private ArrayList<Habit> HabitList = new ArrayList<Habit>();
-    private ArrayAdapter<Habit> HabitListAadpter;
+    private ArrayAdapter<Habit> HabitListAdapter;
     private ListView HabitAdapter;
 
 
@@ -78,7 +77,10 @@ public class Main2Activity extends AppCompatActivity
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(Main2Activity.this, ViewHabitActivity.class);
-                startActivity(intent);
+                Habit habit = HabitList.get(position);
+                intent.putExtra("HABIT",habit);
+                intent.putExtra("POSITION",position);
+                startActivityForResult(intent, 2);
             }
         });
 
@@ -92,8 +94,8 @@ public class Main2Activity extends AppCompatActivity
         super.onStart();
         loadFromFile();
         //get result back from elasticsearch
-        HabitListAadpter = new ArrayAdapter<Habit>(this, R.layout.list_item,HabitList);
-        HabitAdapter.setAdapter(HabitListAadpter);
+        HabitListAdapter = new ArrayAdapter<Habit>(this, R.layout.list_item,HabitList);
+        HabitAdapter.setAdapter(HabitListAdapter);
     }
 
     /**
@@ -205,8 +207,8 @@ public class Main2Activity extends AppCompatActivity
             startActivityForResult(intent, 1);
             // Handle the camera action
         } else if (id == R.id.ViewHabit) {
-            Intent intent =  new Intent(Main2Activity.this, ViewHabitActivity.class);
-            startActivityForResult(intent, 2);
+            //Intent intent =  new Intent(Main2Activity.this, ViewHabitActivity.class);
+            //startActivityForResult(intent, 2);
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {
@@ -238,13 +240,25 @@ public class Main2Activity extends AppCompatActivity
                 ArrayList freq = data.getStringArrayListExtra("freq");
                 Habit habit = new Habit(title,reason,sDate,freq);
                 HabitList.add(habit);
-                HabitListAadpter.notifyDataSetChanged();
+                HabitListAdapter.notifyDataSetChanged();
                 saveInFile();
 
             }
             return;
             //Do Something after returning from Add Habit
         }else if(requestCode==2){
+            if(resultCode==400){
+
+                int position = data.getIntExtra("POSITION", 0);
+                //Log.i("Deletion?","here: "+position.toString());
+
+                HabitList.remove(position);
+                HabitListAdapter.notifyDataSetChanged();
+                saveInFile();
+
+            }else{
+                Log.i("Deletion?","Failed");
+            }
             //Do Something after returning from Veiw
             return;
         }

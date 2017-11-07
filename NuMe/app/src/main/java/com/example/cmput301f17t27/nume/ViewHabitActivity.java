@@ -1,5 +1,6 @@
 package com.example.cmput301f17t27.nume;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
@@ -11,12 +12,13 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class ViewHabitActivity extends AppCompatActivity {
     //Request codes for startingActivityForResult
     protected static final int ADD_EVENT_ACTIVITY_REQUEST_CODE = 100;
     protected static final int EDIT_EVENT_ACTIVITY_REQUEST_CODE = 101;
-
+    protected static final int EDIT_HABIT_ACTIVITY_REQUEST_CODE = 102;
     //Return codes for startingActivityForResult
     protected static final int ADD_EVENT_ACTIVITY_RETURN_CODE = 0;
     protected static final int CANCEL_EVENT_ACTIVITY_RETURN_CODE = 1;
@@ -35,6 +37,22 @@ public class ViewHabitActivity extends AppCompatActivity {
         //Get the habit object you are viewing with this activity
         habit = (Habit) getIntent().getSerializableExtra("HABIT");
 
+        //Setting text elemetns of addHabit
+        TextView habitTitle =(TextView) findViewById(R.id.viewHabitTitle);
+        habitTitle.setText(habit.getTitle());
+        TextView habitReason = (TextView) findViewById(R.id.viewHabitReason);
+        habitReason.setText(habit.getReason());
+        TextView habitFreq = (TextView) findViewById(R.id.viewHabitFreq);
+        StringBuilder sb = new StringBuilder();
+        for( String s : habit.getFrequency()){
+            sb.append(s);
+            sb.append("\t");
+        }
+        habitFreq.setText("Frequency: "+sb.toString());
+        TextView habitsDate = (TextView) findViewById(R.id.viewHabitsDate);
+        habitsDate.setText("Start Date: "+habit.getDateToStart().toString());
+        TextView habitcDate = (TextView) findViewById(R.id.viewHabitcDate);
+        habitcDate.setText("Created Date: "+habit.getDateCreated().toString());
         //Setup the UI list of HabitEvents
         //todo fix
         //adapter = new EventAdapter(this, habit.getEvents());
@@ -75,7 +93,30 @@ public class ViewHabitActivity extends AppCompatActivity {
                 startActivityForResult(intent, EDIT_EVENT_ACTIVITY_REQUEST_CODE);
             }
         });
+        //Edit Habit
+        Button editHabitButton = (Button) findViewById(R.id.editHabitbutton);
+        editHabitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ViewHabitActivity.this, EditHabitActivity.class);
+                intent.putExtra("HABIT",habit);
+                startActivityForResult(intent,EDIT_HABIT_ACTIVITY_REQUEST_CODE);
+            }
+        });
+        //Delete Habit
+        Button deleteHabitButton = (Button) findViewById(R.id.deleteHabitbutton);
+        deleteHabitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                habit=null;
+                Intent intent = new Intent(ViewHabitActivity.this, Main2Activity.class);
+                Integer position = getIntent().getIntExtra("POSITION", 0);
+                intent.putExtra("POSITION",position);
+                setResult(400, intent);
 
+                finish();
+            }
+        });
         //Setup the Add Event button and the listener for it
         Button addEventButton = (Button) findViewById(R.id.addeventbutton);
         addEventButton.setOnClickListener(new View.OnClickListener() {

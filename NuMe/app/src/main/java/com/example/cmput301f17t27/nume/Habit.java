@@ -1,5 +1,7 @@
 package com.example.cmput301f17t27.nume;
 
+import android.util.Log;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -14,6 +16,7 @@ import java.util.Date;
  */
 public class Habit implements Serializable {
 
+    //TODO Fix Start Date
     private String title;
     private String reason;
     private Date dateCreated;
@@ -32,6 +35,8 @@ public class Habit implements Serializable {
         this.title = title;
         this.reason = reason;
         this.dateCreated= new Date();
+        //Log.d("Checking Date 1", dateToStart.toString());
+        //Log.d("Checking Date 2", dateCreated.toString());
         this.dateToStart=dateToStart;
         this.frequency=frequency;
     }
