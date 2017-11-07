@@ -1,0 +1,131 @@
+-- Merging decision tree log ---
+manifest
+ADDED from C:\Users\Matt\Code\Android\CMPUT301\NuMe\NuMe\app\src\main\AndroidManifest.xml:2:1-37:12
+	package
+		ADDED from C:\Users\Matt\Code\Android\CMPUT301\NuMe\NuMe\app\src\main\AndroidManifest.xml:3:5-46
+		INJECTED from C:\Users\Matt\Code\Android\CMPUT301\NuMe\NuMe\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Matt\Code\Android\CMPUT301\NuMe\NuMe\app\src\main\AndroidManifest.xml
+	android:versionName
+		INJECTED from C:\Users\Matt\Code\Android\CMPUT301\NuMe\NuMe\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Matt\Code\Android\CMPUT301\NuMe\NuMe\app\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from C:\Users\Matt\Code\Android\CMPUT301\NuMe\NuMe\app\src\main\AndroidManifest.xml:2:11-69
+	android:versionCode
+		INJECTED from C:\Users\Matt\Code\Android\CMPUT301\NuMe\NuMe\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Matt\Code\Android\CMPUT301\NuMe\NuMe\app\src\main\AndroidManifest.xml
+uses-permission#android.permission.ACCESS_FINE_LOCATION
+ADDED from C:\Users\Matt\Code\Android\CMPUT301\NuMe\NuMe\app\src\main\AndroidManifest.xml:5:5-79
+	android:name
+		ADDED from C:\Users\Matt\Code\Android\CMPUT301\NuMe\NuMe\app\src\main\AndroidManifest.xml:5:22-76
+application
+ADDED from C:\Users\Matt\Code\Android\CMPUT301\NuMe\NuMe\app\src\main\AndroidManifest.xml:7:5-35:19
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\Matt\.android\build-cache\17da92a07ee6864ecb1e89db638489651f2f3e6d\output\AndroidManifest.xml:9:5-20
+MERGED from [com.android.support:design:26.0.0-alpha1] C:\Users\Matt\.android\build-cache\c3b888b1619f58cf98e9422a834bd7bd5d9f283a\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:appcompat-v7:26.0.0-alpha1] C:\Users\Matt\.android\build-cache\9d5e99fa3155da1d53a77ab3d7e6a5b212c3d589\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:animated-vector-drawable:26.0.0-alpha1] C:\Users\Matt\.android\build-cache\d50fcf173dcb2edea84fefd508551068444eb5a1\output\AndroidManifest.xml:26:5-20
+MERGED from [com.android.support:support-vector-drawable:26.0.0-alpha1] C:\Users\Matt\.android\build-cache\fdb47cbb0be4bcc399dd01eb56ac35c1874cc59b\output\AndroidManifest.xml:26:5-20
+MERGED from [com.android.support:transition:26.0.0-alpha1] C:\Users\Matt\.android\build-cache\f8e9b43d7601c6518d02fd5a5f465bab071d698e\output\AndroidManifest.xml:26:5-20
+MERGED from [com.android.support:support-v4:26.0.0-alpha1] C:\Users\Matt\.android\build-cache\6cf2a6c0270a8b3c11dbe66cc47106364fd515f8\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-media-compat:26.0.0-alpha1] C:\Users\Matt\.android\build-cache\d233e263b8fbf104cae4737bf214bae017c48d7a\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-fragment:26.0.0-alpha1] C:\Users\Matt\.android\build-cache\df5d888ab0ec6bc1453d552bf3f535218eb87b11\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-core-ui:26.0.0-alpha1] C:\Users\Matt\.android\build-cache\1b28f125c5b82ee172ce626421a490ddda744b03\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-core-utils:26.0.0-alpha1] C:\Users\Matt\.android\build-cache\da4929a7f300c83e0df1c6117f434e411381674e\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-compat:26.0.0-alpha1] C:\Users\Matt\.android\build-cache\e3bf29fc32b253ce6c948ecd115ddaf1067dd9dd\output\AndroidManifest.xml:29:5-20
+	android:label
+		ADDED from C:\Users\Matt\Code\Android\CMPUT301\NuMe\NuMe\app\src\main\AndroidManifest.xml:10:9-41
+	android:supportsRtl
+		ADDED from C:\Users\Matt\Code\Android\CMPUT301\NuMe\NuMe\app\src\main\AndroidManifest.xml:12:9-35
+	android:roundIcon
+		ADDED from C:\Users\Matt\Code\Android\CMPUT301\NuMe\NuMe\app\src\main\AndroidManifest.xml:11:9-54
+	android:allowBackup
+		ADDED from C:\Users\Matt\Code\Android\CMPUT301\NuMe\NuMe\app\src\main\AndroidManifest.xml:8:9-35
+	android:icon
+		ADDED from C:\Users\Matt\Code\Android\CMPUT301\NuMe\NuMe\app\src\main\AndroidManifest.xml:9:9-43
+	android:theme
+		ADDED from C:\Users\Matt\Code\Android\CMPUT301\NuMe\NuMe\app\src\main\AndroidManifest.xml:13:9-40
+activity#com.example.cmput301f17t27.nume.MainActivity
+ADDED from C:\Users\Matt\Code\Android\CMPUT301\NuMe\NuMe\app\src\main\AndroidManifest.xml:14:9-50
+	android:name
+		ADDED from C:\Users\Matt\Code\Android\CMPUT301\NuMe\NuMe\app\src\main\AndroidManifest.xml:14:19-47
+activity#com.example.cmput301f17t27.nume.Main2Activity
+ADDED from C:\Users\Matt\Code\Android\CMPUT301\NuMe\NuMe\app\src\main\AndroidManifest.xml:15:9-24:20
+	android:label
+		ADDED from C:\Users\Matt\Code\Android\CMPUT301\NuMe\NuMe\app\src\main\AndroidManifest.xml:17:13-57
+	android:theme
+		ADDED from C:\Users\Matt\Code\Android\CMPUT301\NuMe\NuMe\app\src\main\AndroidManifest.xml:18:13-56
+	android:name
+		ADDED from C:\Users\Matt\Code\Android\CMPUT301\NuMe\NuMe\app\src\main\AndroidManifest.xml:16:13-42
+intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
+ADDED from C:\Users\Matt\Code\Android\CMPUT301\NuMe\NuMe\app\src\main\AndroidManifest.xml:19:13-23:29
+action#android.intent.action.MAIN
+ADDED from C:\Users\Matt\Code\Android\CMPUT301\NuMe\NuMe\app\src\main\AndroidManifest.xml:20:17-69
+	android:name
+		ADDED from C:\Users\Matt\Code\Android\CMPUT301\NuMe\NuMe\app\src\main\AndroidManifest.xml:20:25-66
+category#android.intent.category.LAUNCHER
+ADDED from C:\Users\Matt\Code\Android\CMPUT301\NuMe\NuMe\app\src\main\AndroidManifest.xml:22:17-77
+	android:name
+		ADDED from C:\Users\Matt\Code\Android\CMPUT301\NuMe\NuMe\app\src\main\AndroidManifest.xml:22:27-74
+activity#com.example.cmput301f17t27.nume.AddHabitActivity
+ADDED from C:\Users\Matt\Code\Android\CMPUT301\NuMe\NuMe\app\src\main\AndroidManifest.xml:25:9-28:59
+	android:label
+		ADDED from C:\Users\Matt\Code\Android\CMPUT301\NuMe\NuMe\app\src\main\AndroidManifest.xml:27:13-61
+	android:theme
+		ADDED from C:\Users\Matt\Code\Android\CMPUT301\NuMe\NuMe\app\src\main\AndroidManifest.xml:28:13-56
+	android:name
+		ADDED from C:\Users\Matt\Code\Android\CMPUT301\NuMe\NuMe\app\src\main\AndroidManifest.xml:26:13-45
+activity#com.example.cmput301f17t27.nume.ViewHabitActivity
+ADDED from C:\Users\Matt\Code\Android\CMPUT301\NuMe\NuMe\app\src\main\AndroidManifest.xml:29:9-32:59
+	android:label
+		ADDED from C:\Users\Matt\Code\Android\CMPUT301\NuMe\NuMe\app\src\main\AndroidManifest.xml:31:13-62
+	android:theme
+		ADDED from C:\Users\Matt\Code\Android\CMPUT301\NuMe\NuMe\app\src\main\AndroidManifest.xml:32:13-56
+	android:name
+		ADDED from C:\Users\Matt\Code\Android\CMPUT301\NuMe\NuMe\app\src\main\AndroidManifest.xml:30:13-46
+activity#com.example.cmput301f17t27.nume.AddEventActivity
+ADDED from C:\Users\Matt\Code\Android\CMPUT301\NuMe\NuMe\app\src\main\AndroidManifest.xml:33:9-54
+	android:name
+		ADDED from C:\Users\Matt\Code\Android\CMPUT301\NuMe\NuMe\app\src\main\AndroidManifest.xml:33:19-51
+activity#com.example.cmput301f17t27.nume.EditEventActivity
+ADDED from C:\Users\Matt\Code\Android\CMPUT301\NuMe\NuMe\app\src\main\AndroidManifest.xml:34:9-64
+	android:name
+		ADDED from C:\Users\Matt\Code\Android\CMPUT301\NuMe\NuMe\app\src\main\AndroidManifest.xml:34:19-52
+uses-sdk
+INJECTED from C:\Users\Matt\Code\Android\CMPUT301\NuMe\NuMe\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\Matt\.android\build-cache\17da92a07ee6864ecb1e89db638489651f2f3e6d\output\AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support:design:26.0.0-alpha1] C:\Users\Matt\.android\build-cache\c3b888b1619f58cf98e9422a834bd7bd5d9f283a\output\AndroidManifest.xml:21:5-23:62
+MERGED from [com.android.support:appcompat-v7:26.0.0-alpha1] C:\Users\Matt\.android\build-cache\9d5e99fa3155da1d53a77ab3d7e6a5b212c3d589\output\AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:animated-vector-drawable:26.0.0-alpha1] C:\Users\Matt\.android\build-cache\d50fcf173dcb2edea84fefd508551068444eb5a1\output\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:26.0.0-alpha1] C:\Users\Matt\.android\build-cache\fdb47cbb0be4bcc399dd01eb56ac35c1874cc59b\output\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:recyclerview-v7:26.0.0-alpha1] C:\Users\Matt\.android\build-cache\9aced4dbf2a8c4f3615136fd6605ae1eb8052cdb\output\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:transition:26.0.0-alpha1] C:\Users\Matt\.android\build-cache\f8e9b43d7601c6518d02fd5a5f465bab071d698e\output\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:26.0.0-alpha1] C:\Users\Matt\.android\build-cache\6cf2a6c0270a8b3c11dbe66cc47106364fd515f8\output\AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-media-compat:26.0.0-alpha1] C:\Users\Matt\.android\build-cache\d233e263b8fbf104cae4737bf214bae017c48d7a\output\AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-fragment:26.0.0-alpha1] C:\Users\Matt\.android\build-cache\df5d888ab0ec6bc1453d552bf3f535218eb87b11\output\AndroidManifest.xml:21:5-23:60
+MERGED from [com.android.support:support-core-ui:26.0.0-alpha1] C:\Users\Matt\.android\build-cache\1b28f125c5b82ee172ce626421a490ddda744b03\output\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-utils:26.0.0-alpha1] C:\Users\Matt\.android\build-cache\da4929a7f300c83e0df1c6117f434e411381674e\output\AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:support-compat:26.0.0-alpha1] C:\Users\Matt\.android\build-cache\e3bf29fc32b253ce6c948ecd115ddaf1067dd9dd\output\AndroidManifest.xml:21:5-23:58
+	tools:overrideLibrary
+		ADDED from [com.android.support:design:26.0.0-alpha1] C:\Users\Matt\.android\build-cache\c3b888b1619f58cf98e9422a834bd7bd5d9f283a\output\AndroidManifest.xml:23:9-59
+	android:targetSdkVersion
+		INJECTED from C:\Users\Matt\Code\Android\CMPUT301\NuMe\NuMe\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Matt\Code\Android\CMPUT301\NuMe\NuMe\app\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from C:\Users\Matt\Code\Android\CMPUT301\NuMe\NuMe\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Matt\Code\Android\CMPUT301\NuMe\NuMe\app\src\main\AndroidManifest.xml
+meta-data#android.support.VERSION
+ADDED from [com.android.support:design:26.0.0-alpha1] C:\Users\Matt\.android\build-cache\c3b888b1619f58cf98e9422a834bd7bd5d9f283a\output\AndroidManifest.xml:25:5-27:41
+MERGED from [com.android.support:appcompat-v7:26.0.0-alpha1] C:\Users\Matt\.android\build-cache\9d5e99fa3155da1d53a77ab3d7e6a5b212c3d589\output\AndroidManifest.xml:25:5-27:41
+MERGED from [com.android.support:animated-vector-drawable:26.0.0-alpha1] C:\Users\Matt\.android\build-cache\d50fcf173dcb2edea84fefd508551068444eb5a1\output\AndroidManifest.xml:22:5-24:41
+MERGED from [com.android.support:support-vector-drawable:26.0.0-alpha1] C:\Users\Matt\.android\build-cache\fdb47cbb0be4bcc399dd01eb56ac35c1874cc59b\output\AndroidManifest.xml:22:5-24:41
+MERGED from [com.android.support:recyclerview-v7:26.0.0-alpha1] C:\Users\Matt\.android\build-cache\9aced4dbf2a8c4f3615136fd6605ae1eb8052cdb\output\AndroidManifest.xml:22:5-24:41
+MERGED from [com.android.support:transition:26.0.0-alpha1] C:\Users\Matt\.android\build-cache\f8e9b43d7601c6518d02fd5a5f465bab071d698e\output\AndroidManifest.xml:22:5-24:41
+MERGED from [com.android.support:support-v4:26.0.0-alpha1] C:\Users\Matt\.android\build-cache\6cf2a6c0270a8b3c11dbe66cc47106364fd515f8\output\AndroidManifest.xml:25:5-27:41
+MERGED from [com.android.support:support-media-compat:26.0.0-alpha1] C:\Users\Matt\.android\build-cache\d233e263b8fbf104cae4737bf214bae017c48d7a\output\AndroidManifest.xml:25:5-27:41
+MERGED from [com.android.support:support-fragment:26.0.0-alpha1] C:\Users\Matt\.android\build-cache\df5d888ab0ec6bc1453d552bf3f535218eb87b11\output\AndroidManifest.xml:25:5-27:41
+MERGED from [com.android.support:support-core-ui:26.0.0-alpha1] C:\Users\Matt\.android\build-cache\1b28f125c5b82ee172ce626421a490ddda744b03\output\AndroidManifest.xml:25:5-27:41
+MERGED from [com.android.support:support-core-utils:26.0.0-alpha1] C:\Users\Matt\.android\build-cache\da4929a7f300c83e0df1c6117f434e411381674e\output\AndroidManifest.xml:25:5-27:41
+MERGED from [com.android.support:support-compat:26.0.0-alpha1] C:\Users\Matt\.android\build-cache\e3bf29fc32b253ce6c948ecd115ddaf1067dd9dd\output\AndroidManifest.xml:25:5-27:41
+	android:value
+		ADDED from [com.android.support:design:26.0.0-alpha1] C:\Users\Matt\.android\build-cache\c3b888b1619f58cf98e9422a834bd7bd5d9f283a\output\AndroidManifest.xml:27:9-38
+	android:name
+		ADDED from [com.android.support:design:26.0.0-alpha1] C:\Users\Matt\.android\build-cache\c3b888b1619f58cf98e9422a834bd7bd5d9f283a\output\AndroidManifest.xml:26:9-47

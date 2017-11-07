@@ -1,0 +1,7 @@
+#Tue Nov 07 12:28:56 MST 2017
+base.0=C\:\\Users\\Matt\\Code\\Android\\CMPUT301\\NuMe\\NuMe\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run_21701d27b0a809670acc262ad881a96fdcc97d51
+renamed.1=classes.dex
+renamed.0=classes2.dex
+file.1=C\:\\Users\\Matt\\Code\\Android\\CMPUT301\\NuMe\\NuMe\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run-bootstrap_104604d1ce4d3d7601fc9e263d1041c4f631cf40\\classes.dex
+base.1=C\:\\Users\\Matt\\Code\\Android\\CMPUT301\\NuMe\\NuMe\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run-bootstrap_104604d1ce4d3d7601fc9e263d1041c4f631cf40
+file.0=C\:\\Users\\Matt\\Code\\Android\\CMPUT301\\NuMe\\NuMe\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run_21701d27b0a809670acc262ad881a96fdcc97d51\\classes.dex
