@@ -19,7 +19,7 @@ public class Habit implements Serializable {
     private Date dateCreated;
     private Date dateToStart;
     private ArrayList<String> frequency;
-    public ArrayList<HabitEvent> habitEvents = new ArrayList<HabitEvent>();
+    private ArrayList<HabitEvent> habitEvents = new ArrayList<HabitEvent>();
 
     /**
      * Creates the Habit Class

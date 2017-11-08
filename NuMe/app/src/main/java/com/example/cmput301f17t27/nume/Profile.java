@@ -12,9 +12,9 @@ public class Profile {
     private String username;
     private String password;
     private String fullName;
-    public ArrayList<Habit> habitList = new ArrayList<>();
-    public ArrayList<Profile> followingList = new ArrayList<>();
-    public ArrayList<Profile> followerList = new ArrayList<>();
+    private ArrayList<Habit> habitList = new ArrayList<>();
+    private ArrayList<Profile> followingList = new ArrayList<>();
+    private ArrayList<Profile> followerList = new ArrayList<>();
 
     /*
      * constructor with username and password;
@@ -37,18 +37,73 @@ public class Profile {
 
     public String getUserName(){return this.username;}
     public String getName(){return this.fullName;}
+
+    public ArrayList<Profile> getFollowingList() {
+        return followingList;
+    }
+
+    public ArrayList<Profile> getFollowerList() {
+        return followerList;
+    }
+
+    public ArrayList<Habit> getHabitList() {
+        return habitList;
+    }
+
     public void setName(String newName){ fullName = newName;}
 
-    /*
-     * Return a sorted history of HabitEvents from all habits
-     * or only one habit
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    /**
+     * Adds a new habit to the profile.
+     *
+     * @param habit : habit to add to the profile
+     */
+    public void addHabit(Habit habit) {
+        if (!habitList.contains(habit)) {
+            habitList.add(habit);
+        }
+    }
+
+    /**
+     * Deletes a habit based on where it is in the index.
+     *
+     * @param index : Index of habit to be removed from the profile.
+     */
+    public void deleteHabit(int index) {
+        if (index < habitList.size()) {
+            habitList.remove(index);
+        }
+    }
+
+    /**
+     * Removes a habit from the profile based on direct reference to the habit.
+     *
+     * @param habit : habit to be removed from the profile
+     */
+    public void deleteHabit(Habit habit) {
+        if (habitList.contains(habit)) {
+            habitList.remove(habit);
+        }
+    }
+
+    public Habit getHabit(int index) {
+        return habitList.get(index);
+    }
+
+    /**
+     * Returns a sorted list of all events of a profile
+     *
+     * @return Reverse chronological list of all events from a profile
      */
     public ArrayList<HabitEvent> habitHistory() {
 
         ArrayList<HabitEvent> history = new ArrayList<HabitEvent>();
 
         for (Habit habit : habitList) {
-            history.addAll(habit.habitEvents);
+            history.addAll(habit.getEvents());
         }
 
         if (history.size() > 0) {
@@ -66,9 +121,15 @@ public class Profile {
 
     }
 
+    /**
+     * Return a sorted list of all events from one habit by directly referencing the habit
+     *
+     * @param habit : habit to get the events from
+     * @return Reverse chronological list of all events of a certain habit
+     */
     public ArrayList<HabitEvent> habitHistory(Habit habit) {
 
-        ArrayList<HabitEvent> history = habit.habitEvents;
+        ArrayList<HabitEvent> history = habit.getEvents();
 
         if (history.size() > 0) {
             Collections.sort(history, new Comparator<HabitEvent>() {
@@ -84,12 +145,42 @@ public class Profile {
         return history;
     }
 
+    /**
+     * Return a sorted list of all events from a habit based on where it is indexed in a profile.
+     *
+     * @param index : index of habit to get the events from
+     * @return Reverse chronological list of all events of a certain habit
+     */
+    public ArrayList<HabitEvent> habitHistory(int index) {
+        ArrayList<HabitEvent> history = this.getHabit(index).getEvents();
+
+        if (history.size() > 0) {
+            Collections.sort(history, new Comparator<HabitEvent>() {
+                @Override
+                public int compare(HabitEvent event1, HabitEvent event2) {
+                    return event1.getDateCompleted().compareTo(event2.getDateCompleted());
+                }
+            });
+
+            Collections.reverse(history);
+        }
+
+        return history;
+    }
+
+    /**
+     * Returns a sorted list of all events in a profile
+     * that contain a certain search term in the comment.
+     *
+     * @param searchFor : Term to search for in the comments of the habit events
+     * @return Reverse chronological list of all events from a profile with that term in the comment.
+     */
     public ArrayList<HabitEvent> habitHistory(String searchFor) {
 
         ArrayList<HabitEvent> history = new ArrayList<HabitEvent>();
 
         for (Habit habit : habitList) {
-            history.addAll(habit.habitEvents);
+            history.addAll(habit.getEvents());
         }
 
         for (HabitEvent event : history) {
@@ -112,9 +203,50 @@ public class Profile {
         return history;
     }
 
+    /**
+     * Returns a sorted list of events from a habit
+     * with a certain search term in the comment of the habit
+     * and with the habit directly referenced.
+     *
+     * @param habit : Habit to get events from
+     * @param searchFor : Term to search for in the comments.
+     * @return Reverse chronological list of all events from that habit with that term in the comment.
+     */
     public ArrayList<HabitEvent> habitHistory(Habit habit, String searchFor) {
 
-        ArrayList<HabitEvent> history = habit.habitEvents;
+        ArrayList<HabitEvent> history = habit.getEvents();
+
+        for (HabitEvent event : history) {
+            if (!event.getComment().toLowerCase().contains(searchFor.toLowerCase())) {
+                history.remove(event);
+            }
+        }
+
+        if (history.size() > 0) {
+            Collections.sort(history, new Comparator<HabitEvent>() {
+                @Override
+                public int compare(HabitEvent event1, HabitEvent event2) {
+                    return event1.getDateCompleted().compareTo(event2.getDateCompleted());
+                }
+            });
+
+            Collections.reverse(history);
+        }
+
+        return history;
+    }
+
+    /**
+     * Returns a sorted list of all events from a certain habit
+     * and with a certain term in the comment
+     * and with the habit accessed on where it is indexed in the profile
+     *
+     * @param index : Where the habit is indexed in a profile
+     * @param searchFor : What term we are searching for in a HabitEvent comment
+     * @return Reverse chronological list of all events from a habit with a certain term in the comment.
+     */
+    public ArrayList<HabitEvent> habitHistory(int index, String searchFor) {
+        ArrayList<HabitEvent> history = this.getHabit(index).getEvents();
 
         for (HabitEvent event : history) {
             if (!event.getComment().toLowerCase().contains(searchFor.toLowerCase())) {
