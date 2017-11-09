@@ -8,6 +8,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -48,8 +49,11 @@ public class ViewHabitActivity extends AppCompatActivity {
             sb.append(s);
             sb.append("\t");
         }
+
         habitFreq.setText("Frequency: "+sb.toString());
         TextView habitsDate = (TextView) findViewById(R.id.viewHabitsDate);
+        //habitsDate.setText("Start Date: "+habit.getDateToStart().toString());
+        String sDateString =habit.getDateToStart().toString();
         habitsDate.setText("Start Date: "+habit.getDateToStart().toString());
         TextView habitcDate = (TextView) findViewById(R.id.viewHabitcDate);
         habitcDate.setText("Created Date: "+habit.getDateCreated().toString());

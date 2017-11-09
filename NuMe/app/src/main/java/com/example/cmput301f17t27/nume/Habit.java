@@ -1,5 +1,7 @@
 package com.example.cmput301f17t27.nume;
 
+import android.util.Log;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
