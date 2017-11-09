@@ -5,9 +5,11 @@ import java.util.Collections;
 import java.util.Comparator;
 
 /**
- * Created by Matt on 2017-10-20.
+ * Creates the profile class
+ *
+ * @author
+ * @version 0.1
  */
-
 public class Profile {
     private String username;
     private String password;
