@@ -92,7 +92,7 @@ public class Main2Activity extends AppCompatActivity
     @Override
     protected void onStart(){
         super.onStart();
-        loadFromFile();
+        //loadFromFile();
         //get result back from elasticsearch
         HabitListAdapter = new ArrayAdapter<Habit>(this, R.layout.list_item,HabitList);
         HabitAdapter.setAdapter(HabitListAdapter);
@@ -239,9 +239,16 @@ public class Main2Activity extends AppCompatActivity
                 Date sDate = (Date) data.getSerializableExtra("date");
                 ArrayList freq = data.getStringArrayListExtra("freq");
                 Habit habit = new Habit(title,reason,sDate,freq);
+                try{
+                    ElasticsearchController.CreateHabit createHabit =
+                            new ElasticsearchController.CreateHabit();
+                    createHabit.execute(habit);
+                }catch (RuntimeException e){
+                    throw new RuntimeException("Something went wrong will querying");
+                }
                 HabitList.add(habit);
                 HabitListAdapter.notifyDataSetChanged();
-                saveInFile();
+                //saveInFile();
 
             }
             return;
@@ -254,7 +261,7 @@ public class Main2Activity extends AppCompatActivity
 
                 HabitList.remove(position);
                 HabitListAdapter.notifyDataSetChanged();
-                saveInFile();
+                //saveInFile();
 
             }else{
                 Log.i("Deletion?","Failed");
