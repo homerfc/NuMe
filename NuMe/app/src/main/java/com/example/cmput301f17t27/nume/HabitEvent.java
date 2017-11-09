@@ -5,9 +5,11 @@ import android.location.Location;
 import java.util.Date;
 
 /**
- * Created by Matt on 2017-10-20.
+ * Creates the Habit Event class
+ *
+ * @author CMPUT301F17T27
+ * @version 0.1
  */
-
 public class HabitEvent {
     private Date dateCompleted;
     private String comment;

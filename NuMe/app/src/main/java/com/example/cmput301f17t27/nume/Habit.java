@@ -12,6 +12,7 @@ import java.util.Date;
  * @version 0.1
  * @see Main2Activity
  * @see AddHabitActivity
+ * @see HabitEvent
  * @since 0.1
  */
 public class Habit implements Serializable {

@@ -7,8 +7,9 @@ import java.util.Comparator;
 /**
  * Creates the profile class
  *
- * @author
+ * @author CMPUT301F17T27
  * @version 0.1
+ * @see Habit
  */
 public class Profile {
     private String username;

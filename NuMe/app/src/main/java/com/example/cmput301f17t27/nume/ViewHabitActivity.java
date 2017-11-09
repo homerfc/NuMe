@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -26,8 +27,14 @@ public class ViewHabitActivity extends AppCompatActivity {
     protected static final int SAVE_EVENT_ACTIVITY_RETURN_CODE = 2;
     protected static final int DELETE_EVENT_ACTIVITY_RETURN_CODE = 3;
 
+    /*
+        private ArrayList<Habit> HabitList = new ArrayList<Habit>();
+    private ArrayAdapter<Habit> HabitListAdapter;
+    private ListView HabitAdapter;
+    */
+
     private Habit habit;
-    public EventAdapter adapter;
+    public ArrayAdapter<HabitEvent> adapter;
     private ListView eventList;
 
     @Override
@@ -59,7 +66,7 @@ public class ViewHabitActivity extends AppCompatActivity {
         habitcDate.setText("Created Date: "+habit.getDateCreated().toString());
         //Setup the UI list of HabitEvents
         //todo fix
-        //adapter = new EventAdapter(this, habit.getEvents());
+        adapter = new EventAdapter(this, habit.getEvents());
 
         //No list view available
         eventList = (ListView) findViewById(R.id.eventlist);
