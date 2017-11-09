@@ -105,6 +105,7 @@ public class ViewHabitActivity extends AppCompatActivity {
             }
         });
         //Edit Habit
+        //Crashes if an event is in the habit
         Button editHabitButton = (Button) findViewById(R.id.editHabitbutton);
         editHabitButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -202,6 +203,7 @@ public class ViewHabitActivity extends AppCompatActivity {
                 else {
                     habitEvent.setLocation(null);
                 }
+                adapter.notifyDataSetChanged();
             }
 
             //If the delete button was clicked in that activity
@@ -211,6 +213,8 @@ public class ViewHabitActivity extends AppCompatActivity {
 
                 //Delete that event from the Habit object
                 habit.deleteEvent(index);
+                adapter.notifyDataSetChanged();
+                //eventList.
             }
 
             //If the cancel button was clicked in that activity
