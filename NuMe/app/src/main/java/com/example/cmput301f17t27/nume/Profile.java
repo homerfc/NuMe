@@ -112,7 +112,7 @@ public class Profile {
             history.addAll(habit.getEvents());
         }
 
-        if (history.size() > 0) {
+        if (history.size() > 1) {
             Collections.sort(history, new Comparator<HabitEvent>() {
                 @Override
                 public int compare(HabitEvent event1, HabitEvent event2) {
@@ -137,7 +137,7 @@ public class Profile {
 
         ArrayList<HabitEvent> history = habit.getEvents();
 
-        if (history.size() > 0) {
+        if (history.size() > 1) {
             Collections.sort(history, new Comparator<HabitEvent>() {
                 @Override
                 public int compare(HabitEvent event1, HabitEvent event2) {
@@ -160,7 +160,7 @@ public class Profile {
     public ArrayList<HabitEvent> habitHistory(int index) {
         ArrayList<HabitEvent> history = this.getHabit(index).getEvents();
 
-        if (history.size() > 0) {
+        if (history.size() > 1) {
             Collections.sort(history, new Comparator<HabitEvent>() {
                 @Override
                 public int compare(HabitEvent event1, HabitEvent event2) {
@@ -195,7 +195,7 @@ public class Profile {
             }
         }
 
-        if (history.size() > 0) {
+        if (history.size() > 1) {
             Collections.sort(history, new Comparator<HabitEvent>() {
                 @Override
                 public int compare(HabitEvent event1, HabitEvent event2) {
@@ -228,7 +228,7 @@ public class Profile {
             }
         }
 
-        if (history.size() > 0) {
+        if (history.size() > 1) {
             Collections.sort(history, new Comparator<HabitEvent>() {
                 @Override
                 public int compare(HabitEvent event1, HabitEvent event2) {
@@ -260,7 +260,7 @@ public class Profile {
             }
         }
 
-        if (history.size() > 0) {
+        if (history.size() > 1) {
             Collections.sort(history, new Comparator<HabitEvent>() {
                 @Override
                 public int compare(HabitEvent event1, HabitEvent event2) {
