@@ -189,9 +189,16 @@ public class Profile {
             history.addAll(habit.getEvents());
         }
 
-        for (HabitEvent event : history) {
+        /* for (HabitEvent event : history) {
             if (!event.getComment().toLowerCase().contains(searchFor.toLowerCase())) {
                 history.remove(event);
+            }
+        }
+        */
+
+        for (int i = history.size()-1; i > -1; i--) {
+            if (!history.get(i).getComment().toLowerCase().contains(searchFor.toLowerCase())) {
+                history.remove(i);
             }
         }
 
