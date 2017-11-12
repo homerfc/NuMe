@@ -21,7 +21,7 @@ public class ProfileTest extends ActivityInstrumentationTestCase2 {
      */
     public void testGetUserName(){
         String username = "Test";
-        Profile testProfile = new Profile(username, "Test");
+        Profile testProfile = new Profile(username);
         assertEquals(testProfile.getUserName(), username);
     }
 
@@ -32,7 +32,7 @@ public class ProfileTest extends ActivityInstrumentationTestCase2 {
      */
     public void testGetName(){
         String username = "Test";
-        Profile testProfile = new Profile(username, "Test");
+        Profile testProfile = new Profile(username);
         assertEquals(testProfile.getName(), username);
     }
 
@@ -42,7 +42,7 @@ public class ProfileTest extends ActivityInstrumentationTestCase2 {
      * set the name "Ginger", then reset the name via method setName();
      */
     public void testSetName(){
-        Profile testProfile = new Profile("Ginger", "Password");
+        Profile testProfile = new Profile("Ginger");
         String newUserName = "Fred";
         testProfile.setName(newUserName);
         assertEquals(testProfile.getName(), newUserName);
@@ -57,7 +57,9 @@ public class ProfileTest extends ActivityInstrumentationTestCase2 {
     public void testHabitsList(){
         ArrayList<Habit> habitList = new ArrayList<>();
         Date dateToStart = new Date();
-        Habit testHabit = new Habit("testTitle","testReason",dateToStart, Habit.Frequency.MONDAY);
+        ArrayList<String> frequency = new ArrayList<>();
+        frequency.add("Monday");
+        Habit testHabit = new Habit("testTitle","testReason",dateToStart, frequency);
         habitList.add(testHabit);
         assertSame(habitList.get(0),testHabit);
 
@@ -69,10 +71,10 @@ public class ProfileTest extends ActivityInstrumentationTestCase2 {
      * assertSame to test whether the arraylist contain the correct object
      */
     public void testFollowing(){
-        Profile testToFollow = new Profile("Test 1", "Test 1");
-        Profile testFollowing = new Profile("Test 2", "Test 2");
-        testFollowing.followingList.add(testToFollow);
-        assertSame(testFollowing.followingList.get(0), testToFollow);
+        Profile testToFollow = new Profile("Test 1");
+        Profile testFollowing = new Profile("Test 2");
+        testFollowing.followSomeone(testToFollow);
+        assertSame(testFollowing.getFollowingList().get(0), testToFollow);
 
     }
 
@@ -84,8 +86,8 @@ public class ProfileTest extends ActivityInstrumentationTestCase2 {
     public void testFollower(){
         Profile testFollowed = new Profile("Test 1", "Test 1");
         Profile testFollower = new Profile("Test 2", "Test 2");
-        testFollowed.followerList.add(testFollower);
-        assertSame(testFollowed.followerList.get(0), testFollower);
+        testFollowed.addFollower(testFollower);
+        assertSame(testFollowed.getFollowerList().get(0), testFollower);
 
     }
 
@@ -98,24 +100,26 @@ public class ProfileTest extends ActivityInstrumentationTestCase2 {
 
         Profile test = new Profile("Test", "Test");
         Date dateToStart = new Date();
-        Habit habit1 = new Habit("Test 1", "Test 1", dateToStart, Habit.Frequency.FRIDAY);
-        Habit habit2 = new Habit("Test 2", "Test 2", dateToStart, Habit.Frequency.FRIDAY);
-        Habit habit3 = new Habit("Test 3", "Test 3", dateToStart, Habit.Frequency.FRIDAY);
-        test.habitList.add(habit1);
-        test.habitList.add(habit2);
-        test.habitList.add(habit3);
+        ArrayList<String> frequency = new ArrayList<>();
+        frequency.add("Monday");
+        Habit habit1 = new Habit("Test 1", "Test 1", dateToStart, frequency);
+        Habit habit2 = new Habit("Test 2", "Test 2", dateToStart, frequency);
+        Habit habit3 = new Habit("Test 3", "Test 3", dateToStart, frequency);
+        test.addHabit(habit1);
+        test.addHabit(habit2);
+        test.addHabit(habit3);
         HabitEvent event1 = new HabitEvent();
         HabitEvent event2 = new HabitEvent();
         HabitEvent event3 = new HabitEvent();
         HabitEvent event4 = new HabitEvent();
         HabitEvent event5 = new HabitEvent();
         HabitEvent event6 = new HabitEvent();
-        habit1.habitEvents.add(event1);
-        habit1.habitEvents.add(event2);
-        habit2.habitEvents.add(event3);
-        habit2.habitEvents.add(event4);
-        habit3.habitEvents.add(event5);
-        habit3.habitEvents.add(event6);
+        habit1.addEvent(event1);
+        habit1.addEvent(event2);
+        habit2.addEvent(event3);
+        habit2.addEvent(event4);
+        habit3.addEvent(event5);
+        habit3.addEvent(event6);
         ArrayList<HabitEvent> testEvents = new ArrayList<>();
         testEvents.add(event6);
         testEvents.add(event5);
@@ -131,24 +135,26 @@ public class ProfileTest extends ActivityInstrumentationTestCase2 {
 
         Profile test = new Profile("Test", "Test");
         Date dateToStart = new Date();
-        Habit habit1 = new Habit("Test 1", "Test 1", dateToStart, Habit.Frequency.FRIDAY);
-        Habit habit2 = new Habit("Test 2", "Test 2", dateToStart, Habit.Frequency.FRIDAY);
-        Habit habit3 = new Habit("Test 3", "Test 3", dateToStart, Habit.Frequency.FRIDAY);
-        test.habitList.add(habit1);
-        test.habitList.add(habit2);
-        test.habitList.add(habit3);
+        ArrayList<String> frequency = new ArrayList<>();
+        frequency.add("Monday");
+        Habit habit1 = new Habit("Test 1", "Test 1", dateToStart, frequency);
+        Habit habit2 = new Habit("Test 2", "Test 2", dateToStart, frequency);
+        Habit habit3 = new Habit("Test 3", "Test 3", dateToStart, frequency);
+        test.addHabit(habit1);
+        test.addHabit(habit2);
+        test.addHabit(habit3);
         HabitEvent event1 = new HabitEvent();
         HabitEvent event2 = new HabitEvent();
         HabitEvent event3 = new HabitEvent();
         HabitEvent event4 = new HabitEvent();
         HabitEvent event5 = new HabitEvent();
         HabitEvent event6 = new HabitEvent();
-        habit1.habitEvents.add(event1);
-        habit1.habitEvents.add(event2);
-        habit2.habitEvents.add(event3);
-        habit2.habitEvents.add(event4);
-        habit3.habitEvents.add(event5);
-        habit3.habitEvents.add(event6);
+        habit1.addEvent(event1);
+        habit1.addEvent(event2);
+        habit2.addEvent(event3);
+        habit2.addEvent(event4);
+        habit3.addEvent(event5);
+        habit3.addEvent(event6);
         ArrayList<HabitEvent> testEvents = new ArrayList<>();
         testEvents.add(event4);
         testEvents.add(event3);
@@ -157,9 +163,33 @@ public class ProfileTest extends ActivityInstrumentationTestCase2 {
     }
 
     public void testHabitHistorySearch() {
-        Profile test = new Profile("Test", "Test", "Test");
+        Profile test = new Profile("Test", "Test");
         Date dateToStart = new Date();
-        Habit habit = new Habit("Test 1", "Test 1", dateToStart, Habit.Frequency.FRIDAY);
+        ArrayList<String> frequency = new ArrayList<>();
+        frequency.add("Monday");
+        Habit habit1 = new Habit("Test 1", "Test 1", dateToStart, frequency);
+        Habit habit2 = new Habit("Test 2", "Test 2", dateToStart, frequency);
+        Habit habit3 = new Habit("Test 3", "Test 3", dateToStart, frequency);
+        test.addHabit(habit1);
+        test.addHabit(habit2);
+        test.addHabit(habit3);
+        HabitEvent event1 = new HabitEvent("search term", 0);
+        HabitEvent event2 = new HabitEvent("not", 0);
+        HabitEvent event3 = new HabitEvent("not", 0);
+        HabitEvent event4 = new HabitEvent("not", 0);
+        HabitEvent event5 = new HabitEvent("search term", 0);
+        HabitEvent event6 = new HabitEvent("search term", 0);
+        habit1.addEvent(event1);
+        habit1.addEvent(event2);
+        habit2.addEvent(event3);
+        habit2.addEvent(event4);
+        habit3.addEvent(event5);
+        habit3.addEvent(event6);
+        ArrayList<HabitEvent> testEvents = new ArrayList<>();
+        testEvents.add(event6);
+        testEvents.add(event5);
+        testEvents.add(event1);
+        assertEquals(test.habitHistory("search term"), testEvents);
     }
 
 

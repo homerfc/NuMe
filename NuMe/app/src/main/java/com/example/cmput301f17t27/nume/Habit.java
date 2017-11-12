@@ -8,7 +8,7 @@ import java.util.Date;
 
 /**
  * Creates the Habit class
- * @author
+ * @author CMPUT301F17T27
  * @version 0.1
  * @see Main2Activity
  * @see AddHabitActivity

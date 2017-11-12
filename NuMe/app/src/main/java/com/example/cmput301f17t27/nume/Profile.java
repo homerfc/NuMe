@@ -19,21 +19,24 @@ public class Profile {
     private ArrayList<Profile> followingList = new ArrayList<>();
     private ArrayList<Profile> followerList = new ArrayList<>();
 
-    /*
-     * constructor with username and password;
+    /**
+     * Creates an object of the Profile class
+     *
+     * @param username
      */
-    public Profile(String username, String password){
+    public Profile(String username){
         this.username = username;
-        this.password = password;
 
     }
 
-    /*
-     * constructor with username and password and fullName;
+    /**
+     * Creates an object of the Profile class
+     *
+     * @param username
+     * @param fullName
      */
-    public Profile(String username, String password, String fullName){
+    public Profile(String username, String fullName){
         this.username = username;
-        this.password = password;
         this.fullName = fullName;
     }
 
@@ -269,6 +272,28 @@ public class Profile {
         }
 
         return history;
+    }
+
+    /**
+     * Accept someone's request to follow you
+     *
+     * @param follower : Profile that follows you
+     */
+    public void addFollower(Profile follower) {
+        if (!this.followerList.contains(follower)) {
+            this.followerList.add(follower);
+        }
+    }
+
+    /**
+     * When someone accepts your follow request, follow them.
+     *
+     * @param following : Profile that you follow
+     */
+    public void followSomeone(Profile following) {
+        if (!this.followingList.contains(following)) {
+            this.followingList.add(following);
+        }
     }
 
 }
