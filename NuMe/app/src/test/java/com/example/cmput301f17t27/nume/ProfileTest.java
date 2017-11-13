@@ -146,7 +146,7 @@ public class ProfileTest {
     /**
      * Created by mkluk
      * testing the habitHistory method
-     * to see if it returns all events with a certain search term in order.
+     * to see if it returns all events of a certain habit in order.
      */
     @Test
     public void testHabitHistoryFiltered() {
@@ -180,6 +180,12 @@ public class ProfileTest {
 
     }
 
+    /**
+     * Created by mkluk
+     * testint the habitHistory method
+     * to see if it returns all events with a certain search term
+     * in the comment in order.
+     */
     @Test
     public void testHabitHistorySearch() {
         Profile test = new Profile("Test", "Test");
@@ -211,6 +217,12 @@ public class ProfileTest {
         assertEquals(test.habitHistory("search term"), testEvents);
     }
 
+    /**
+     * created by mkluk
+     * Tests the habitHistory method
+     * to see if it returns all events of a certain habit
+     * accessed from its index in order.
+     */
     @Test
     public void testHabitHistoryIndex() {
         Profile test = new Profile("Test", "Test");
@@ -241,6 +253,12 @@ public class ProfileTest {
         assertEquals(test.habitHistory(1), testEvents);
     }
 
+    /**
+     * Created by mkluk
+     * Testing the habitHistory method
+     * to see if it returns, in order, the events
+     * from a certain habit and with a certain search term.
+     */
     @Test
     public void testHabitHistoryIndexSearch() {
         Profile test = new Profile("Test", "Test");
@@ -270,6 +288,12 @@ public class ProfileTest {
         assertEquals(test.habitHistory(1, "search term"), testEvents);
     }
 
+    /**
+     * Created by mkluk
+     * Testing the habitHistory method
+     * that returns, in order, the events
+     * of one habit by direct reference.
+     */
     @Test
     public void testHabitHistoryHabit() {
         Profile test = new Profile("Test", "Test");
@@ -300,6 +324,13 @@ public class ProfileTest {
         assertEquals(test.habitHistory(habit2), testEvents);
     }
 
+    /**
+     * Created by mkluk
+     * Testing the habitHistory method
+     * that returns, in order, the events
+     * from a directly referenced habit
+     * and with a certain search term in the comment.
+     */
     @Test
     public void testHabitHistoryHabitSearch() {
         Profile test = new Profile("Test", "Test");
