@@ -116,7 +116,7 @@ public class Profile {
             history.addAll(habit.getEvents());
         }
 
-        if (history.size() > 0) {
+        if (history.size() > 1) {
             Collections.sort(history, new Comparator<HabitEvent>() {
                 @Override
                 public int compare(HabitEvent event1, HabitEvent event2) {
@@ -141,7 +141,7 @@ public class Profile {
 
         ArrayList<HabitEvent> history = habit.getEvents();
 
-        if (history.size() > 0) {
+        if (history.size() > 1) {
             Collections.sort(history, new Comparator<HabitEvent>() {
                 @Override
                 public int compare(HabitEvent event1, HabitEvent event2) {
@@ -164,7 +164,7 @@ public class Profile {
     public ArrayList<HabitEvent> habitHistory(int index) {
         ArrayList<HabitEvent> history = this.getHabit(index).getEvents();
 
-        if (history.size() > 0) {
+        if (history.size() > 1) {
             Collections.sort(history, new Comparator<HabitEvent>() {
                 @Override
                 public int compare(HabitEvent event1, HabitEvent event2) {
@@ -193,13 +193,20 @@ public class Profile {
             history.addAll(habit.getEvents());
         }
 
-        for (HabitEvent event : history) {
+        /* for (HabitEvent event : history) {
             if (!event.getComment().toLowerCase().contains(searchFor.toLowerCase())) {
                 history.remove(event);
             }
         }
+        */
 
-        if (history.size() > 0) {
+        for (int i = history.size()-1; i > -1; i--) {
+            if (!history.get(i).getComment().toLowerCase().contains(searchFor.toLowerCase())) {
+                history.remove(i);
+            }
+        }
+
+        if (history.size() > 1) {
             Collections.sort(history, new Comparator<HabitEvent>() {
                 @Override
                 public int compare(HabitEvent event1, HabitEvent event2) {
@@ -232,7 +239,7 @@ public class Profile {
             }
         }
 
-        if (history.size() > 0) {
+        if (history.size() > 1) {
             Collections.sort(history, new Comparator<HabitEvent>() {
                 @Override
                 public int compare(HabitEvent event1, HabitEvent event2) {
@@ -264,7 +271,7 @@ public class Profile {
             }
         }
 
-        if (history.size() > 0) {
+        if (history.size() > 1) {
             Collections.sort(history, new Comparator<HabitEvent>() {
                 @Override
                 public int compare(HabitEvent event1, HabitEvent event2) {
@@ -276,6 +283,28 @@ public class Profile {
         }
 
         return history;
+    }
+
+    /**
+     * Accept someone's request to follow you
+     *
+     * @param follower : Profile that follows you
+     */
+    public void addFollower(Profile follower) {
+        if (!this.followerList.contains(follower)) {
+            this.followerList.add(follower);
+        }
+    }
+
+    /**
+     * When someone accepts your follow request, follow them.
+     *
+     * @param following : Profile that you follow
+     */
+    public void followSomeone(Profile following) {
+        if (!this.followingList.contains(following)) {
+            this.followingList.add(following);
+        }
     }
 
 }

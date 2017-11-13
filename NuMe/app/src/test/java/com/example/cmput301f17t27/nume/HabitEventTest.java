@@ -26,6 +26,9 @@ public class HabitEventTest {
 
     @Test
     public void testSetComment() {
-        Habit
+        HabitEvent habitEvent = new HabitEvent();
+        String comment = "I'm a comment";
+        habitEvent.setComment(comment);
+        assertEquals(habitEvent.getComment(), comment);
     }
 }
