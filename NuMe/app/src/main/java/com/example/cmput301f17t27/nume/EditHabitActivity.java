@@ -56,6 +56,8 @@ public class EditHabitActivity extends AppCompatActivity {
         editHabitSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ElasticsearchHabitController.UpdateHabitTask UpdateHabitTask = new ElasticsearchHabitController.UpdateHabitTask();
+
                 Intent intent = new Intent();
                 setResult(Activity.RESULT_OK, intent);
                 finish();

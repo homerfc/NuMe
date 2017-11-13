@@ -92,9 +92,15 @@ public class Main2Activity extends AppCompatActivity
     @Override
     protected void onStart(){
         super.onStart();
-        loadFromFile();
-        //get result back from elasticsearch
-        HabitListAdapter = new ArrayAdapter<Habit>(this, R.layout.list_item,HabitList);
+        ElasticsearchHabitController.GetHabitTask getHabitTask = new ElasticsearchHabitController.GetHabitTask();
+        getHabitTask.execute();
+        try{
+            HabitList = getHabitTask.get();
+        }catch (Exception e){
+            Log.i("Error", "Msg");
+        }
+        HabitListAdapter = new ArrayAdapter<Habit>(this,
+                R.layout.list_item, HabitList);
         HabitAdapter.setAdapter(HabitListAdapter);
     }
 

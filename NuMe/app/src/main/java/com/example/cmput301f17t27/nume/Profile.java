@@ -22,6 +22,13 @@ public class Profile {
     /*
      * constructor with username and password;
      */
+
+
+    public Profile(String username){
+        this.username = username;
+    }
+
+
     public Profile(String username, String password){
         this.username = username;
         this.password = password;

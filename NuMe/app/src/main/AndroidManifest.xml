@@ -3,6 +3,9 @@
     package="com.example.cmput301f17t27.nume">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -11,7 +14,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity">
+
+        </activity>
         <activity
             android:name=".Main2Activity"
             android:label="@string/title_activity_main2"
@@ -35,6 +40,10 @@
         <activity
             android:name=".EditHabitActivity"
             android:label="@string/title_activity_edit_habit"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".CreateProfileActivity"
+            android:label="@string/title_activity_create_profile"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

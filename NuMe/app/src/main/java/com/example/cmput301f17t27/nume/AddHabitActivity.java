@@ -65,7 +65,7 @@ public class AddHabitActivity extends AppCompatActivity {
         fri = (CheckBox) findViewById(R.id.cBfriday);
         sat = (CheckBox) findViewById(R.id.cBsaturday);
 
-        Button addHabit = (Button) findViewById(R.id.addHabit);
+        final Button addHabit = (Button) findViewById(R.id.addHabit);
 
         addHabit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,7 +115,11 @@ public class AddHabitActivity extends AppCompatActivity {
                 }
 
                 //todo pass to elasticsearch index
-                //ElasticsearchController.AddHabitTask addHabitTask = new ElasticsearchController.AddHabitTask();
+                //ElasticsearchProfileController.AddHabitTask addHabitTask = new ElasticsearchProfileController.AddHabitTask();
+                Habit newHabit = new Habit(habit_title,habit_reason,start_Date,frequencyList);
+                ElasticsearchHabitController.addHabitTask addHabitTask = new ElasticsearchHabitController.addHabitTask();
+                addHabitTask.execute(newHabit);
+
 
                 //Passes info to main2Activity to be processed and saved
                 if(valid) {
