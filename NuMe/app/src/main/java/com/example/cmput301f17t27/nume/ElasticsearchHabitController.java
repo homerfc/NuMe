@@ -35,14 +35,11 @@ public class ElasticsearchHabitController {
 
 
             for ( Habit habit : habits) {
-                //make the username as type;
-                //create the profile in elasticsearch
                 Index index = new Index.Builder(habit).index("cmput301f17t27_nume").type("habit").build();
                 try {
                     client.execute(index);
                 } catch (Exception e) {
                     Log.i("Error", "Failed to add habit to Elasticsearch");
-                    //e.printStackTrace();
                 }
             }
             return null;
@@ -58,23 +55,19 @@ public class ElasticsearchHabitController {
 
             ArrayList<Habit> habits = new ArrayList<Habit>();
 
-            //Log.i("Test", "doInBackground: search_parameters Length: " + search_parameters.length);
-            if (search_parameters.length == 0) {
+            if (search_parameters.length == 1) {
 
-                //just simply check whether the index contain the desired type name
-                //String query = "{\n" + "\" query\": { \"match\": {\"username\":\"" + search_parameters[0] + "\"} }\n" + "}";
+                String query = "{\n" + " \"query\": { \"match\": {\"owner\":\"" + search_parameters[0] + "\"} }\n" + "}";
 
-                String query = "";
                 Search search = new Search.Builder(query)
                         .addIndex("cmput301f17t27_nume")
                         .addType("habit").build();
 
-                //Log.i("SearchInfo:",search.gexcaotURI());
 
-                //broken since here: throw the NetworkOnMainThreadException
+
+
                 try {
                     SearchResult result = client.execute(search);
-                    Log.i("SearchresultInfo:",result.getJsonString());
 
                     if (result.isSucceeded()) {
                         List<Habit> foundHabits = result.getSourceAsObjectList(Habit.class);

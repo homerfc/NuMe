@@ -32,6 +32,7 @@ public class Habit implements Serializable {
      * @param frequency
      */
     public Habit( String title, String reason, Date dateToStart, ArrayList frequency) {
+
         this.title = title;
         this.reason = reason;
         this.dateCreated= new Date();

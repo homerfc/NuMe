@@ -51,6 +51,9 @@ public class AddHabitActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_habit);
+
+
+
         frequencyList = new ArrayList<String>();
 
         title = (EditText) findViewById(R.id.editTextHabitTitle);
@@ -115,10 +118,8 @@ public class AddHabitActivity extends AppCompatActivity {
                 }
 
                 //todo pass to elasticsearch index
-                //ElasticsearchProfileController.AddHabitTask addHabitTask = new ElasticsearchProfileController.AddHabitTask();
-                Habit newHabit = new Habit(habit_title,habit_reason,start_Date,frequencyList);
-                ElasticsearchHabitController.addHabitTask addHabitTask = new ElasticsearchHabitController.addHabitTask();
-                addHabitTask.execute(newHabit);
+                
+
 
 
                 //Passes info to main2Activity to be processed and saved

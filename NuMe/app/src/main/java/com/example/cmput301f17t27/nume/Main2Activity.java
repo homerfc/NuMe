@@ -3,6 +3,7 @@ package com.example.cmput301f17t27.nume;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.AndroidRuntimeException;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -29,9 +30,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.PipedReader;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 
 /**
  * Creates the Main2Activity
@@ -48,6 +51,8 @@ public class Main2Activity extends AppCompatActivity
     private ArrayList<Habit> HabitList = new ArrayList<Habit>();
     private ArrayAdapter<Habit> HabitListAdapter;
     private ListView HabitAdapter;
+    private ArrayList<Profile> ProfileList = new ArrayList<>();
+
 
 
     /**
@@ -92,13 +97,29 @@ public class Main2Activity extends AppCompatActivity
     @Override
     protected void onStart(){
         super.onStart();
-        ElasticsearchHabitController.GetHabitTask getHabitTask = new ElasticsearchHabitController.GetHabitTask();
-        getHabitTask.execute();
+        //get the right profile by matching the username; username is from mainActivity
+        Intent getIntentExtra = getIntent();
+        String UserName = getIntentExtra.getStringExtra("username");
+        //ElasticsearchHabitController.GetHabitTask getHabitTask = new ElasticsearchHabitController.GetHabitTask();
+        //getHabitTask.execute(UserName);
+        ElasticsearchProfileController.GetProfileTask getProfileTask = new ElasticsearchProfileController.GetProfileTask();
+        getProfileTask.execute(UserName);
+
         try{
-            HabitList = getHabitTask.get();
+            //HabitList = getHabitTask.get();
+            ProfileList = getProfileTask.get();
         }catch (Exception e){
             Log.i("Error", "Msg");
         }
+
+        //get habits from profile
+
+        Profile profile = ProfileList.get(0);
+        HabitList = profile.getHabitList();
+        //Log.i("HabitList", String.valueOf(HabitList.size()));
+
+
+        //put on the adapter
         HabitListAdapter = new ArrayAdapter<Habit>(this,
                 R.layout.list_item, HabitList);
         HabitAdapter.setAdapter(HabitListAdapter);
@@ -108,23 +129,23 @@ public class Main2Activity extends AppCompatActivity
      * Loads Counters from a saved file
      * Else creates a new Coutner Array
      */
-    private void loadFromFile(){
-        try {
-            FileInputStream fis = openFileInput(FILENAME);
-            BufferedReader in = new BufferedReader(new InputStreamReader(fis));
-            Gson gson = new Gson();
-            //RenAME
-            Type listType = new TypeToken<ArrayList<Habit>>(){}.getType();
-            HabitList= gson.fromJson(in, listType);
-
-        } catch (FileNotFoundException e) {
-                HabitList  = new ArrayList<Habit>();
-            //throw new RuntimeException(e);
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
+//    private void loadFromFile(){
+//        try {
+//            FileInputStream fis = openFileInput(FILENAME);
+//            BufferedReader in = new BufferedReader(new InputStreamReader(fis));
+//            Gson gson = new Gson();
+//            //RenAME
+//            Type listType = new TypeToken<ArrayList<Habit>>(){}.getType();
+//            HabitList= gson.fromJson(in, listType);
+//
+//        } catch (FileNotFoundException e) {
+//                HabitList  = new ArrayList<Habit>();
+//            //throw new RuntimeException(e);
+//
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
 
     /**
      * saves Habits to the file
@@ -244,10 +265,22 @@ public class Main2Activity extends AppCompatActivity
                 String reason = data.getStringExtra("reason");
                 Date sDate = (Date) data.getSerializableExtra("date");
                 ArrayList freq = data.getStringArrayListExtra("freq");
+
+                //this username is from MainActivity when user loged in;
+                String owner = getIntent().getStringExtra("username");
+
                 Habit habit = new Habit(title,reason,sDate,freq);
-                HabitList.add(habit);
-                HabitListAdapter.notifyDataSetChanged();
-                saveInFile();
+
+
+                //get the profile object
+
+                Profile profile = ProfileList.get(0);
+                //Log.i("username:",profile.getName());
+                profile.addHabit(habit);
+
+                ElasticsearchProfileController.UpdateProfileTask updateProfileTask = new ElasticsearchProfileController.UpdateProfileTask();
+                updateProfileTask.execute(profile);
+
 
             }
             return;

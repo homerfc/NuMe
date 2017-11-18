@@ -24,6 +24,7 @@ import io.searchbox.core.Index;
 import io.searchbox.core.Search;
 import io.searchbox.core.DocumentResult;
 import io.searchbox.core.SearchResult;
+import io.searchbox.core.Update;
 
 /**
  * Created by Matt on 2017-11-09.
@@ -40,7 +41,6 @@ public class ElasticsearchProfileController {
 
 
             for ( Profile profile : profiles) {
-                String userName = profile.getUserName();
                 Index index = new Index.Builder(profile).index("cmput301f17t27_nume").type("profile").build();
                 try {
                     client.execute(index);
@@ -53,6 +53,31 @@ public class ElasticsearchProfileController {
         }
 
 
+    }
+    public static class UpdateProfileTask extends AsyncTask<Profile, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Profile... search_parameters) {
+            verifySettings();
+
+            Profile profiles = search_parameters[0];
+            Index index = new Index.Builder(profiles).index("cmput301f17t27_nume").type("profile").build();
+
+            try {
+                DocumentResult result = client.execute(index);
+                if (!result.isSucceeded()) {
+                    Log.i("Error", "Elasticsearch was not able to update user.");
+                }
+            } catch (Exception e) {
+                Log.i("Error", "The application failed to build and send user.");
+            }
+
+
+
+
+            return null;
+
+        }
     }
 
     public static class GetProfileTask extends AsyncTask<String, Void, ArrayList<Profile>> {
@@ -67,17 +92,17 @@ public class ElasticsearchProfileController {
                 String search_username = search_parameters[0];
                 //Log.i("debugInfo",search_username); successfully return the parameters;
                 String query = "{\"query\" : {\"match\" : { \"username\" : \"" + search_parameters[0] + "\" }}}";
-                Log.i("query",query);
+
                 Search search = new Search.Builder(query)
                         .addIndex("cmput301f17t27_nume")
                         .addType("profile").build();
 
 
 
-                //broken since here: throw the NetworkOnMainThreadException
+
+
                 try {
                     SearchResult result = client.execute(search);
-                    Log.i("SearchresultInfo:",result.getJsonString());
 
                     if (result.isSucceeded()) {
                         List<Profile> foundProfiles = result.getSourceAsObjectList(Profile.class);
@@ -98,9 +123,13 @@ public class ElasticsearchProfileController {
 
             }
 
+
             return profiles;
         }
     }
+
+
+
 
 
     private static void verifySettings() {

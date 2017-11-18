@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.w3c.dom.ProcessingInstruction;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -37,23 +39,31 @@ public class MainActivity extends AppCompatActivity {
                 //get username as the parameter
                 String UserName = username.getText().toString();
                 ElasticsearchProfileController.GetProfileTask getprofileTask = new ElasticsearchProfileController.GetProfileTask();
-                ArrayList<Profile> returnedProfileList = new ArrayList<Profile>();
-                returnedProfileList = getprofileTask.doInBackground(UserName);
+                getprofileTask.execute(UserName);
 
-                Profile returnedProfile = returnedProfileList.get(0);
-                Log.i("return_value", returnedProfile.getUserName());
+                try {
+                    ArrayList<Profile> profileList = getprofileTask.get();
 
-                if(returnedProfile!=null){
-                    Intent successLogin = new Intent(getApplicationContext(),Main2Activity.class);
-                    successLogin.putExtra("username",UserName);
-                    startActivity(successLogin);
-                }else{
-                    //pop the message state that username is invalid
-                    Toast newToast = Toast.makeText(getApplicationContext(), "UserName can't be found", Toast.LENGTH_SHORT);
-                    newToast.show();
+                    if(profileList.size() == 1){
+                        //Profile testProfile = profileList.get(1);
+                        //Log.i("profileName", testProfile.getName());
+                        Intent successLogin = new Intent(getApplicationContext(),Main2Activity.class);
+                        successLogin.putExtra("username",UserName);
+                        startActivity(successLogin);
+                    }else{
+                        //pop the message state that username is invalid
+                        Toast newToast = Toast.makeText(getApplicationContext(), "UserName can't be found", Toast.LENGTH_SHORT);
+                        newToast.show();
+                    }
+
+                }catch (Exception e){
+                    Log.i("Error", "Error getting users out of async object");
+
                 }
+
 
             }
         });
+
     }
 }
