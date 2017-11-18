@@ -3,9 +3,13 @@ package com.example.cmput301f17t27.nume;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class LoginActivity extends AppCompatActivity {
     //Request codes for startingActivityForResult
@@ -30,7 +34,38 @@ public class LoginActivity extends AppCompatActivity {
         //Setup the login button listener
         loginButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
-                //Do elastic search and start habitList
+                //Start the getProfile AsyncTask
+                ElasticSearchController.GetProfileTask getProfileTask = new ElasticSearchController.GetProfileTask();
+                getProfileTask.execute(userName.getText().toString());
+
+                try {
+                    //Get the profile from the task
+                    Profile profile = getProfileTask.get();
+
+                    //If the profile exists
+                    if(profile != null) {
+                        //Bundle up the profile and start the habit list activity
+                        Intent intent = new Intent(LoginActivity.this, HabitListActivity.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("PROFILE", profile);
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+                    }
+
+                    //If the profile doesn't exist
+                    else {
+                        //Alert the user
+                        Toast newToast = Toast.makeText(getApplicationContext(),
+                                "That username doesn't exist. Try again", Toast.LENGTH_SHORT);
+                        newToast.show();
+                    }
+                }
+
+                catch (Exception e){
+                    Toast newToast = Toast.makeText(getApplicationContext(),
+                            "Error, please try again.", Toast.LENGTH_SHORT);
+                    newToast.show();
+                }
             }
         });
 

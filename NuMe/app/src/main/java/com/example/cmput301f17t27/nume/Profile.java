@@ -1,5 +1,6 @@
 package com.example.cmput301f17t27.nume;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -11,7 +12,8 @@ import java.util.Comparator;
  * @version 0.1
  * @see Habit
  */
-public class Profile {
+public class Profile implements Serializable {
+    private String id;
     private String username;
     private String fullName;
     private ArrayList<Habit> habitList = new ArrayList<>();
@@ -26,8 +28,20 @@ public class Profile {
 
 
 
+    public String getId() {
+        return id;
+    }
+
+
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+
+
     public String getUserName(){
-        return this.username;
+        return username;
     }
 
 

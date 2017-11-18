@@ -5,38 +5,35 @@ import android.location.Location;
 import java.io.Serializable;
 import java.util.Date;
 
-/**
- * Creates the Habit Event class
- *
- * @author CMPUT301F17T27
- * @version 0.1
- */
+
 public class HabitEvent implements Serializable {
     private Date dateCompleted;
     private String comment;
     private String image;
     private Location location;
 
-    public static final String defImage = "@android:drawable/sym_def_app_icon";
 
     public HabitEvent() {
-
         this.dateCompleted = new Date();
-
     }
 
-    public HabitEvent( String commentOrImage, int index ) {
 
+
+    public HabitEvent( String commentOrImage, int index ) {
         this.dateCompleted = new Date();
 
         if ( index == 0 ) {
             if ( commentOrImage.length() <= 20 ) {
                 this.comment = commentOrImage;
             }
-        } else if ( index == 1 ) {
+        }
+
+        else if ( index == 1 ) {
             this.image = commentOrImage;
         }
     }
+
+
 
     public HabitEvent( String comment, String image ) {
 
@@ -49,8 +46,9 @@ public class HabitEvent implements Serializable {
         this.image = image;
     }
 
-    public HabitEvent( String comment, String image, Location location) {
 
+
+    public HabitEvent( String comment, String image, Location location) {
         this.dateCompleted = new Date();
 
         if ( comment.length() <= 20 ) {
@@ -59,28 +57,39 @@ public class HabitEvent implements Serializable {
 
         this.image = image;
         this.location = location;
+    }
 
-     }
+
 
     public Date getDateCompleted() {
         return dateCompleted;
     }
 
+
+
     public String getComment() {
         return comment;
     }
+
+
 
     public String getImage() {
         return image;
     }
 
+
+
     public Location getLocation() {
         return location;
     }
 
+
+
     public void setDateCompleted() {
         this.dateCompleted = new Date();
     }
+
+
 
     public void setComment(String comment) {
         if (comment.length() <= 20) {
@@ -88,9 +97,13 @@ public class HabitEvent implements Serializable {
         }
     }
 
+
+
     public void setImage(String image) {
         this.image = image;
     }
+
+
 
     public void setLocation(Location location) {
         this.location = location;

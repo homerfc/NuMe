@@ -2,7 +2,6 @@ package com.example.cmput301f17t27.nume;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,21 +15,10 @@ import android.view.MenuItem;
 /*imported widget*/
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.util.ArrayList;
-import java.util.Date;
 
 
 public class HabitListActivity extends AppCompatActivity
@@ -55,16 +43,25 @@ public class HabitListActivity extends AppCompatActivity
     private DrawerLayout drawer;
     private NavigationView nav;
     private View navHeader;
-    private TextView fullname;
+    private TextView fullName;
     private ActionBarDrawerToggle toggle;
     private HabitAdapter adapter;
     private ListView habitList;
     private Button addButton;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_habit_list);
+
+        //Un-bundle the profile sent from the login screen (The one on elastic search)
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        profile = (Profile) bundle.getSerializable("PROFILE");
+
+        //Update the profile
+        updateProfile();
 
         //Setup the drawer and toolbar
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -77,19 +74,15 @@ public class HabitListActivity extends AppCompatActivity
         nav = (NavigationView) findViewById(R.id.nav_view);
         nav.setNavigationItemSelectedListener(this);
 
-        //Profile definition
-        profile = new Profile("TestUser", "TestName");
-        //profile = LocalFileController.loadFromFile(HabitListActivity.this);
-
         //UI definitions
         navHeader = nav.getHeaderView(0);
-        fullname = (TextView) navHeader.findViewById(R.id.fullname);
+        fullName = (TextView) navHeader.findViewById(R.id.fullname);
         habitList = (ListView) findViewById(R.id.habitlist);
         adapter = new HabitAdapter(this, profile.getHabitList());
         addButton = (Button) findViewById(R.id.addbutton);
 
         //Set the user's name in the drawer
-        fullname.setText(profile.getName());
+        fullName.setText(profile.getName());
 
         //Set the adapter for the list of habits
         habitList.setAdapter(adapter);
@@ -107,6 +100,7 @@ public class HabitListActivity extends AppCompatActivity
                 Bundle bundle = new Bundle();
                 Habit habit = profile.getHabit(position);
                 bundle.putSerializable("HABIT", habit);
+                bundle.putInt("INDEX", index);
                 intent.putExtras(bundle);
                 startActivityForResult(intent, VIEW_HABIT_REQUEST_CODE);
             }
@@ -169,7 +163,7 @@ public class HabitListActivity extends AppCompatActivity
         if (id == R.id.habitsbutton) {
             drawer.closeDrawer(GravityCompat.START);
         }
-        //TODO
+
         else if (id == R.id.eventsearchbutton) {
 
         }
@@ -201,7 +195,7 @@ public class HabitListActivity extends AppCompatActivity
                 Habit habit = (Habit) bundle.getSerializable("HABIT");
                 profile.addHabit(habit);
                 adapter.notifyDataSetChanged();
-                //LocalFileController.saveToFile(HabitListActivity.this, profile);
+                SaveLoadController.saveProfileToFile(HabitListActivity.this, profile);
             }
 
             //If the user clicked the cancel button
@@ -218,20 +212,63 @@ public class HabitListActivity extends AppCompatActivity
                 Habit habit = (Habit) bundle.getSerializable("HABIT");
                 profile.setHabit(index, habit);
                 adapter.notifyDataSetChanged();
-                //LocalFileController.saveToFile(HabitListActivity.this, profile);
+                SaveLoadController.saveProfileToFile(HabitListActivity.this, profile);
             }
 
             //If the user deleted the habit
             else if(resultCode == HABIT_DELETED_RESULT_CODE) {
                 profile.deleteHabit(index);
                 adapter.notifyDataSetChanged();
-                //LocalFileController.saveToFile(HabitListActivity.this, profile);
+                SaveLoadController.saveProfileToFile(HabitListActivity.this, profile);
             }
 
             //If the user didn't change the habit in any way
             else if(resultCode == NO_ACTION_RESULT_CODE) {
                 //Do nothing
             }
+        }
+    }
+
+
+
+    /**
+     * We assume that the data stored locally will always be newer, or just
+     * as new as what's on elastic search. For this reason we will always use
+     * the profile stored locally, unless it is null. In this case, we will use
+     * the profile from elastic search and also save that profile locally to
+     * keep things consistent. (The only time the local profile will be null is
+     * if we are signing in for the first time).
+     */
+    private void updateProfile() {
+        //If the local profile exists
+        Profile localProfile = SaveLoadController.loadProfileFromFile(this);
+        if(localProfile != null) {
+
+            EventCache eventsCache = SaveLoadController.loadEventsFromFile(this);
+            if(eventsCache != null) {
+
+                ArrayList<HabitEvent> habitEvents = eventsCache.getEvents();
+                int eventsIndex = eventsCache.getIndex();
+
+                EventCache eventCache = SaveLoadController.loadEventFromFile(this);
+                if(eventCache != null) {
+                    HabitEvent habitEvent = eventCache.getEvent();
+                    int eventIndex = eventCache.getIndex();
+
+                    habitEvents.set(eventIndex, habitEvent);
+                }
+
+                Habit habit = localProfile.getHabit(eventsIndex);
+                habit.setEvents(habitEvents);
+                localProfile.setHabit(eventsIndex, habit);
+            }
+
+            profile = localProfile;
+        }
+        //If it doesn't, use the one on elastic search (It's already been assigned in onCreate)
+        else {
+            //Save the profile that's on elastic search locally
+            SaveLoadController.saveProfileToFile(this, profile);
         }
     }
 }

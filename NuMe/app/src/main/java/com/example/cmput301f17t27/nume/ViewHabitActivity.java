@@ -29,8 +29,11 @@ public class ViewHabitActivity extends AppCompatActivity {
     private Habit habit;
     private boolean changed;
 
+    //Index of this habit in the HabitListActivity (For saving locally)
+    private int habitIndex;
+
     //Index for which habit event has been clicked in the list
-    private int index;
+    private int eventIndex;
 
     //UI declarations
     private Toolbar toolbar;
@@ -44,14 +47,16 @@ public class ViewHabitActivity extends AppCompatActivity {
     private Button deleteButton;
     private Button addEventButton;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_habit);
 
-        //Un-bundle the habit and save to the member var
+        //Un-bundle the habit and index and save to the member vars
         Bundle bundle = getIntent().getExtras();
         habit = (Habit) bundle.getSerializable("HABIT");
+        habitIndex = bundle.getInt("INDEX");
 
         //Define the changed var
         changed = false;
@@ -84,7 +89,7 @@ public class ViewHabitActivity extends AppCompatActivity {
         eventList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 //Save the index of the habit that was pressed
-                index = i;
+                eventIndex = i;
 
                 //Bundle up the habit event and start the view habit event activity
                 Intent intent = new Intent(ViewHabitActivity.this, ViewEventActivity.class);
@@ -181,6 +186,10 @@ public class ViewHabitActivity extends AppCompatActivity {
                 habit.addEvent(habitEvent);
                 adapter.notifyDataSetChanged();
 
+                //Save the habit events locally
+                SaveLoadController.saveEventsToFile(ViewHabitActivity.this, habit.getEvents(),
+                        habitIndex);
+
                 //Set changed to true because we made changes to the habit
                 changed = true;
 
@@ -204,9 +213,12 @@ public class ViewHabitActivity extends AppCompatActivity {
                 HabitEvent habitEvent = (HabitEvent) bundle.getSerializable("EVENT");
 
                 //Change the event in the event list
-                habit.setEvent(index, habitEvent);
-
+                habit.setEvent(eventIndex, habitEvent);
                 adapter.notifyDataSetChanged();
+
+                //Save the habit events locally
+                SaveLoadController.saveEventsToFile(ViewHabitActivity.this, habit.getEvents(),
+                        habitIndex);
 
                 //Set changed to true because we made changes to the habit
                 changed = true;
@@ -218,9 +230,12 @@ public class ViewHabitActivity extends AppCompatActivity {
             //If the delete button was clicked in that activity
             else if (resultCode == EVENT_DELETED_RESULT_CODE) {
                 //Delete that event from the Habit object
-                habit.deleteEvent(index);
-
+                habit.deleteEvent(eventIndex);
                 adapter.notifyDataSetChanged();
+
+                //Save the habit events locally
+                SaveLoadController.saveEventsToFile(ViewHabitActivity.this, habit.getEvents(),
+                        habitIndex);
 
                 //Set changed to true because we made changes to the habit
                 changed = true;

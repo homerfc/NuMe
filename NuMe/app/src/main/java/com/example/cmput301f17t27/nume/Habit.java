@@ -14,7 +14,6 @@ import java.util.Date;
  * @since 0.1
  */
 public class Habit implements Serializable {
-
     private String title;
     private String reason;
     private Date dateCreated;
@@ -22,13 +21,7 @@ public class Habit implements Serializable {
     private ArrayList<String> frequency;
     private ArrayList<HabitEvent> habitEvents = new ArrayList<HabitEvent>();
 
-    /**
-     * Creates the Habit Class
-     * @param title
-     * @param reason
-     * @param dateToStart
-     * @param frequency
-     */
+
     public Habit( String title, String reason, Date dateToStart, ArrayList frequency) {
         this.title = title;
         this.reason = reason;
@@ -36,6 +29,8 @@ public class Habit implements Serializable {
         this.dateToStart=dateToStart;
         this.frequency=frequency;
     }
+
+
 
     /**
      * Returns Habits title
@@ -45,6 +40,8 @@ public class Habit implements Serializable {
         return title;
     }
 
+
+
     /**
      * sets habit's title
      * @param title
@@ -52,6 +49,8 @@ public class Habit implements Serializable {
     public void setTitle(String title) {
         this.title = title;
     }
+
+
 
     /**
      * Returns Habit's reason
@@ -61,6 +60,8 @@ public class Habit implements Serializable {
         return reason;
     }
 
+
+
     /**
      * sets Habit's reason
      * @param reason
@@ -68,6 +69,8 @@ public class Habit implements Serializable {
     public void setReason(String reason) {
         this.reason = reason;
     }
+
+
 
     /**
      * gets Habit's created date
@@ -77,6 +80,8 @@ public class Habit implements Serializable {
         return dateCreated;
     }
 
+
+
     /**
      * gets Habit's Start Date
      * @return dateTo Start
@@ -84,6 +89,8 @@ public class Habit implements Serializable {
     public Date getDateToStart() {
         return dateToStart;
     }
+
+
 
     /**
      *  sets Habit's Start Date
@@ -93,6 +100,8 @@ public class Habit implements Serializable {
         this.dateToStart = dateToStart;
     }
 
+
+
     /**
      * ArrayList of Freq. dates
      * @return freq. days
@@ -100,6 +109,8 @@ public class Habit implements Serializable {
     public ArrayList<String> getFrequency() {
         return this.frequency;
     }
+
+
 
     /**
      * Sets the new freq. dates
@@ -109,6 +120,8 @@ public class Habit implements Serializable {
         this.frequency = frequency;
     }
 
+
+
     /**
      * Gets Habit's past events
      * @return events
@@ -116,6 +129,8 @@ public class Habit implements Serializable {
     public ArrayList<HabitEvent> getEvents() {
         return habitEvents;
     }
+
+
 
     /**
      *  Checks to see if Habit has events
@@ -129,6 +144,8 @@ public class Habit implements Serializable {
         return Boolean.FALSE;
     }
 
+
+
     /**
      * Adds a new event to the Habit
      * @param event
@@ -136,6 +153,8 @@ public class Habit implements Serializable {
     public void addEvent(HabitEvent event) {
         habitEvents.add(event);
     }
+
+
 
     /**
      * Returns the specific event selected
@@ -146,6 +165,8 @@ public class Habit implements Serializable {
         return habitEvents.get(index);
     }
 
+
+
     /**
      *
      * @param index
@@ -155,6 +176,18 @@ public class Habit implements Serializable {
         habitEvents.set(index, habitEvent);
     }
 
+
+
+    /**
+     *
+     * @param habitEvents
+     */
+    public void setEvents(ArrayList<HabitEvent> habitEvents) {
+        this.habitEvents = habitEvents;
+    }
+
+
+
     /**
      * Deletes the selected event
      * @param index
@@ -163,6 +196,8 @@ public class Habit implements Serializable {
         habitEvents.remove(index);
     }
 
+
+
     /**
      * Deletes the specific event
      * @param event
@@ -170,6 +205,8 @@ public class Habit implements Serializable {
     public void deleteEvent(HabitEvent event) {
         habitEvents.remove(event);
     }
+
+
 
     /**
      * Returns some arb stat info
@@ -185,6 +222,9 @@ public class Habit implements Serializable {
             return -1;
         }
     }
+
+
+
     @Override
     /**
      * Returns the display string for the habit in list views
@@ -193,6 +233,4 @@ public class Habit implements Serializable {
         //toDo add next occurance of this habit
         return "Habit: "+this.title+"\nReason:"+this.reason;
     }
-
-
 }

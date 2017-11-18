@@ -2,19 +2,12 @@ package com.example.cmput301f17t27.nume;
 
 import android.content.Intent;
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.ColorFilter;
-import android.graphics.drawable.Drawable;
 import android.location.Location;
-import android.support.annotation.IntRange;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Switch;
 import android.widget.TextView;
 
 public class ViewEventActivity extends AppCompatActivity {
@@ -29,6 +22,9 @@ public class ViewEventActivity extends AppCompatActivity {
     private HabitEvent habitEvent;
     private boolean changed;
 
+    //Index of the event that was clicked in view habit (For saving locally)
+    private int eventIndex;
+
     //UI declarations
     private TextView comment;
     private ImageView image;
@@ -37,14 +33,16 @@ public class ViewEventActivity extends AppCompatActivity {
     private Button deleteButton;
     private Button backButton;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_event);
 
-        //Un-bundle the habit event object and save it to the member variable
+        //Un-bundle the habit event and index and save it to the member variables
         Bundle bundle = getIntent().getExtras();
         habitEvent = (HabitEvent) bundle.getSerializable("EVENT");
+        eventIndex = bundle.getInt("INDEX");
 
         //Define the changed var
         changed = false;
@@ -120,6 +118,9 @@ public class ViewEventActivity extends AppCompatActivity {
 
                 //Un-bundle the event and save it to the member variable
                 habitEvent = (HabitEvent) bundle.getSerializable("EVENT");
+
+                //Save the habit event locally
+                SaveLoadController.saveEventToFile(ViewEventActivity.this, habitEvent, eventIndex);
 
                 //Set changed to true because we made changes to the habit
                 changed = true;
